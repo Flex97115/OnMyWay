@@ -1,6 +1,6 @@
 # OnMyWay
 ## Description
-On My Way est la base d'un outil de gestion de restaurant
+On My Way est la base d'un outil de gestion de restaurant développé en C#
 ##Fonctionalités
 - Gestion des tables
 - Gestion des plats
