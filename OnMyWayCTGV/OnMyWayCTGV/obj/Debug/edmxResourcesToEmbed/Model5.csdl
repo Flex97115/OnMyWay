@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onmywaydbCTGVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chair">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tableId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Table" Relationship="Self.FK_Chair_ToTable" FromRole="Chair" ToRole="Table" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Client_ToChair" FromRole="Chair" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ChairId" Type="Int32" />
+    <Property Name="DisheId" Type="Int32" />
+    <NavigationProperty Name="Chair" Relationship="Self.FK_Client_ToChair" FromRole="Client" ToRole="Chair" />
+    <NavigationProperty Name="Dishe" Relationship="Self.FK_Client_ToDishe" FromRole="Client" ToRole="Dishe" />
+  </EntityType>
+  <EntityType Name="Dishe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="disheName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Pricer" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Client_ToDishe" FromRole="Dishe" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="x" Type="Int32" Nullable="false" />
+    <Property Name="y" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Chair" Relationship="Self.FK_Chair_ToTable" FromRole="Table" ToRole="Chair" />
+  </EntityType>
+  <Association Name="FK_Chair_ToTable">
+    <End Role="Table" Type="Self.Table" Multiplicity="1" />
+    <End Role="Chair" Type="Self.Chair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chair">
+        <PropertyRef Name="tableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_ToChair">
+    <End Role="Chair" Type="Self.Chair" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chair">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_ToDishe">
+    <End Role="Dishe" Type="Self.Dishe" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dishe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="DisheId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="onmywaydbCTGVEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chair" EntityType="Self.Chair" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Dishe" EntityType="Self.Dishe" />
+    <EntitySet Name="Table" EntityType="Self.Table" />
+    <AssociationSet Name="FK_Chair_ToTable" Association="Self.FK_Chair_ToTable">
+      <End Role="Table" EntitySet="Table" />
+      <End Role="Chair" EntitySet="Chair" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_ToChair" Association="Self.FK_Client_ToChair">
+      <End Role="Chair" EntitySet="Chair" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_ToDishe" Association="Self.FK_Client_ToDishe">
+      <End Role="Dishe" EntitySet="Dishe" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

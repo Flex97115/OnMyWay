@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="onmywaydbModelStoreContainer" CdmEntityContainer="onmywaydbEntities">
+    <EntitySetMapping Name="Chair">
+      <EntityTypeMapping TypeName="onmywaydbModel.Chair">
+        <MappingFragment StoreEntitySet="Chair">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="tableId" ColumnName="tableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="onmywaydbModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+          <ScalarProperty Name="DisheId" ColumnName="DisheId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dishe">
+      <EntityTypeMapping TypeName="onmywaydbModel.Dishe">
+        <MappingFragment StoreEntitySet="Dishe">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="disheName" ColumnName="disheName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table">
+      <EntityTypeMapping TypeName="onmywaydbModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="x" ColumnName="x" />
+          <ScalarProperty Name="y" ColumnName="y" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
